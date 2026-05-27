@@ -190,40 +190,72 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   to { background-position: 140px 140px; }
 }
 
-/* Brass lamp spotlight that follows the mouse · stronger */
+/* Crimson spotlight following the mouse · three layers of depth.
+   Tinte crimson (Harvard Pantone 187) sobre cream paper = halo notorio
+   pero elegante. Tres springs simultáneos: outer lag grande, mid medio,
+   core seguimiento tight. */
 .lamp-spot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 720px;
-  height: 720px;
+  width: 820px;
+  height: 820px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(248, 220, 150, 0.85) 0%, rgba(232, 204, 143, 0.32) 28%, rgba(232, 204, 143, 0.10) 50%, transparent 70%);
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 1;
-  mix-blend-mode: soft-light;
-  transform: translate3d(-50%, -50%, 0);
-  will-change: transform;
-}
-
-/* Secondary smaller, sharper lamp halo · adds depth to the cursor */
-.lamp-halo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(248, 230, 180, 0.45) 0%, transparent 60%);
-  filter: blur(20px);
+    radial-gradient(circle,
+      rgba(165, 28, 48, 0.38) 0%,
+      rgba(165, 28, 48, 0.18) 28%,
+      rgba(165, 28, 48, 0.08) 48%,
+      transparent 68%);
+  filter: blur(48px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
   transform: translate3d(-50%, -50%, 0);
   will-change: transform;
-  opacity: 0.7;
+}
+
+/* Mid halo · follows mouse tighter, sharper crimson core */
+.lamp-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle,
+      rgba(199, 58, 78, 0.52) 0%,
+      rgba(165, 28, 48, 0.22) 38%,
+      transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+  opacity: 0.92;
+}
+
+/* Sharp core · the brightest point at the cursor, very tight follow */
+.lamp-core {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle,
+      rgba(165, 28, 48, 0.62) 0%,
+      rgba(165, 28, 48, 0.24) 40%,
+      transparent 75%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
 }
 
 /* (Fleurones removed · sustituidos por mapamundi animado) */
@@ -748,19 +780,20 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 }
 .cover-frame {
   position: absolute;
-  inset: clamp(60px, 6vw, 110px);
-  border: 1px solid var(--gold-line);
+  inset: clamp(50px, 5vw, 90px);
   pointer-events: none;
 }
-.cover-frame::before, .cover-frame::after {
+/* Corner brackets only · no continuous border to avoid cutting text */
+.cover-frame::before,
+.cover-frame::after {
   content: '';
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--gold-deep);
 }
-.cover-frame::before { top: -7px; left: -7px; border-right: none; border-bottom: none; }
-.cover-frame::after { bottom: -7px; right: -7px; border-left: none; border-top: none; }
+.cover-frame::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.cover-frame::after { bottom: 0; right: 0; border-left: none; border-top: none; }
 
 .cover-content {
   max-width: 1100px;
@@ -2170,19 +2203,19 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .closing { align-items: center; text-align: center; }
 .closing-frame {
   position: absolute;
-  inset: clamp(60px, 6vw, 110px);
-  border: 1px solid var(--gold-line);
+  inset: clamp(50px, 5vw, 90px);
   pointer-events: none;
 }
-.closing-frame::before, .closing-frame::after {
+.closing-frame::before,
+.closing-frame::after {
   content: '';
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--gold-deep);
 }
-.closing-frame::before { top: -7px; left: -7px; border-right: none; border-bottom: none; }
-.closing-frame::after { bottom: -7px; right: -7px; border-left: none; border-top: none; }
+.closing-frame::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.closing-frame::after { bottom: 0; right: 0; border-left: none; border-top: none; }
 .closing-content {
   max-width: 1000px;
   display: flex;
@@ -2299,9 +2332,10 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   <div class="grain"></div>
   <div class="vignette"></div>
 
-  <!-- Brass lamp spotlight following the mouse -->
+  <!-- Crimson spotlight following the mouse · three layers of depth -->
   <div class="lamp-spot" id="lamp-spot"></div>
   <div class="lamp-halo" id="lamp-halo"></div>
+  <div class="lamp-core" id="lamp-core"></div>
 
   <div class="deck" id="deck">
 
@@ -3608,6 +3642,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   if (!reducedMotion) {
     const lamp = document.getElementById('lamp-spot');
     const halo = document.getElementById('lamp-halo');
+    const core = document.getElementById('lamp-core');
     const par1 = document.querySelector('.parallax-1');
     const par2 = document.querySelector('.parallax-2');
     const globeCanvas = document.getElementById('globe-canvas');
@@ -3616,6 +3651,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
     let my = window.innerHeight / 2;
     let smX = mx, smY = my;
     let smX2 = mx, smY2 = my;
+    let smX3 = mx, smY3 = my;
 
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX;
@@ -3723,9 +3759,17 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
       };
     }
     const CITIES = [
-      { name: 'Bogotá',  pos: ll3d(4.7, -74.1),  color: [165, 28, 48],  size: 4.2, focal: true },
-      { name: 'EE. UU.', pos: ll3d(38.9, -77.0), color: [139, 111, 46], size: 3.2 },
-      { name: 'España',  pos: ll3d(40.4, -3.7),  color: [139, 111, 46], size: 3.2 }
+      { name: 'Bogotá',       pos: ll3d(4.7, -74.1),    color: [165, 28, 48],  size: 4.2, focal: true },
+      { name: 'EE. UU.',      pos: ll3d(38.9, -77.0),   color: [139, 111, 46], size: 3.2 },
+      { name: 'España',       pos: ll3d(40.4, -3.7),    color: [139, 111, 46], size: 3.2 },
+      /* OCDE · referenced in thesis (Convención MLI / BEPS) */
+      { name: 'París · OCDE', pos: ll3d(48.85, 2.35),   color: [139, 111, 46], size: 2.8 },
+      /* Buenos Aires · doctrina de Solari Costa citada en la narrativa */
+      { name: 'Buenos Aires', pos: ll3d(-34.6, -58.4),  color: [139, 111, 46], size: 2.6 },
+      /* Londres · common law tradition + IRS-style binding rulings */
+      { name: 'Londres',      pos: ll3d(51.51, -0.13),  color: [139, 111, 46], size: 2.6 },
+      /* Bruselas · sede de la Convención Multilateral BEPS */
+      { name: 'Bruselas',     pos: ll3d(50.85, 4.35),   color: [139, 111, 46], size: 2.4 }
     ];
     const BOGOTA = CITIES[0];
 
@@ -3902,10 +3946,10 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
         }
       }
 
-      /* Maybe fire an arc to Colombia */
-      if (now - lastArc > 4500 + Math.random() * 1500) {
+      /* Fire arcs from any non-focal city to Bogotá · más frecuente con más ciudades */
+      if (now - lastArc > 2800 + Math.random() * 1400) {
         lastArc = now;
-        const from = CITIES[1 + Math.floor(Math.random() * 2)]; /* USA or España */
+        const from = CITIES[1 + Math.floor(Math.random() * (CITIES.length - 1))];
         fireArc(from);
       }
 
@@ -3991,15 +4035,18 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
     }
     requestAnimationFrame(drawGlobe);
 
-    /* Mouse parallax loop (lamp + parallax layers + globe drift) */
+    /* Mouse parallax loop · three spring layers + parallax + globe drift */
     function tick() {
-      smX += (mx - smX) * 0.085;
-      smY += (my - smY) * 0.085;
-      smX2 += (mx - smX2) * 0.16;
-      smY2 += (my - smY2) * 0.16;
+      smX  += (mx - smX)  * 0.075;   /* outer lamp: lag grande, ethereal */
+      smY  += (my - smY)  * 0.075;
+      smX2 += (mx - smX2) * 0.15;    /* mid halo: medio */
+      smY2 += (my - smY2) * 0.15;
+      smX3 += (mx - smX3) * 0.28;    /* core: seguimiento tight */
+      smY3 += (my - smY3) * 0.28;
 
-      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 360) + 'px, ' + (smY - 360) + 'px, 0)';
-      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 140) + 'px, ' + (smY2 - 140) + 'px, 0)';
+      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 410) + 'px, ' + (smY - 410) + 'px, 0)';
+      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 170) + 'px, ' + (smY2 - 170) + 'px, 0)';
+      if (core) core.style.transform = 'translate3d(' + (smX3 - 55) + 'px, ' + (smY3 - 55) + 'px, 0)';
 
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
