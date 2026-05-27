@@ -236,20 +236,20 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   opacity: 0.85;
 }
 
-/* Sharp core · pequeño punto crimson señalando el cursor */
+/* Sharp core · gold-amber punto cálido siguiendo el cursor (sin crimson) */
 .lamp-core {
   position: fixed;
   top: 0;
   left: 0;
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(165, 28, 48, 0.30) 0%,
-      rgba(165, 28, 48, 0.12) 45%,
+      rgba(110, 80, 32, 0.26) 0%,
+      rgba(139, 111, 46, 0.14) 40%,
       transparent 75%);
-  filter: blur(8px);
+  filter: blur(10px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
@@ -4071,7 +4071,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 
       if (lamp) lamp.style.transform = 'translate3d(' + (smX - 340) + 'px, ' + (smY - 340) + 'px, 0)';
       if (halo) halo.style.transform = 'translate3d(' + (smX2 - 140) + 'px, ' + (smY2 - 140) + 'px, 0)';
-      if (core) core.style.transform = 'translate3d(' + (smX3 - 35) + 'px, ' + (smY3 - 35) + 'px, 0)';
+      if (core) core.style.transform = 'translate3d(' + (smX3 - 45) + 'px, ' + (smY3 - 45) + 'px, 0)';
 
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
