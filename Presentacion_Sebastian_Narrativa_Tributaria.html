@@ -190,24 +190,23 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   to { background-position: 140px 140px; }
 }
 
-/* Crimson spotlight following the mouse · three layers of depth.
-   Tinte crimson (Harvard Pantone 187) sobre cream paper = halo notorio
-   pero elegante. Tres springs simultáneos: outer lag grande, mid medio,
-   core seguimiento tight. */
+/* Three-layer spotlight · ligero pero notorio
+   Outer: gold-sepia muy suave (warmth) · Mid: gold-deep (color subtle)
+   Core: crimson pequeño (señalador del cursor). Springs gemelos. */
 .lamp-spot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 820px;
-  height: 820px;
+  width: 680px;
+  height: 680px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(165, 28, 48, 0.38) 0%,
-      rgba(165, 28, 48, 0.18) 28%,
-      rgba(165, 28, 48, 0.08) 48%,
-      transparent 68%);
-  filter: blur(48px);
+      rgba(139, 111, 46, 0.16) 0%,
+      rgba(139, 111, 46, 0.08) 30%,
+      rgba(139, 111, 46, 0.03) 50%,
+      transparent 70%);
+  filter: blur(44px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
@@ -215,42 +214,42 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   will-change: transform;
 }
 
-/* Mid halo · follows mouse tighter, sharper crimson core */
+/* Mid halo · gold-amber, smaller and tighter */
 .lamp-halo {
   position: fixed;
   top: 0;
   left: 0;
-  width: 340px;
-  height: 340px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(199, 58, 78, 0.52) 0%,
-      rgba(165, 28, 48, 0.22) 38%,
+      rgba(180, 130, 60, 0.22) 0%,
+      rgba(139, 111, 46, 0.10) 40%,
       transparent 70%);
-  filter: blur(24px);
+  filter: blur(22px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
   transform: translate3d(-50%, -50%, 0);
   will-change: transform;
-  opacity: 0.92;
+  opacity: 0.85;
 }
 
-/* Sharp core · the brightest point at the cursor, very tight follow */
+/* Sharp core · pequeño punto crimson señalando el cursor */
 .lamp-core {
   position: fixed;
   top: 0;
   left: 0;
-  width: 110px;
-  height: 110px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(165, 28, 48, 0.62) 0%,
-      rgba(165, 28, 48, 0.24) 40%,
+      rgba(165, 28, 48, 0.30) 0%,
+      rgba(165, 28, 48, 0.12) 45%,
       transparent 75%);
-  filter: blur(10px);
+  filter: blur(8px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
@@ -3773,10 +3772,15 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
     ];
     const BOGOTA = CITIES[0];
 
-    /* Active arcs */
+    /* Active arcs · always crimson tone for visibility (converge metaphor) */
     let arcs = [];
     function fireArc(from) {
-      arcs.push({ from: from.pos, to: BOGOTA.pos, start: performance.now(), color: from.color });
+      arcs.push({
+        from: from.pos,
+        to: BOGOTA.pos,
+        start: performance.now(),
+        color: [165, 28, 48]  /* crimson always · más notorio para el factor convergencia */
+      });
     }
     let lastArc = 0;
 
@@ -3946,11 +3950,25 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
         }
       }
 
-      /* Fire arcs from any non-focal city to Bogotá · más frecuente con más ciudades */
-      if (now - lastArc > 2800 + Math.random() * 1400) {
-        lastArc = now;
-        const from = CITIES[1 + Math.floor(Math.random() * (CITIES.length - 1))];
-        fireArc(from);
+      /* Fire arcs from any visible non-focal city to Bogotá ·
+         Only fire if Bogotá AND the origin city are both on the front
+         hemisphere · guarantees the full arc draws */
+      if (now - lastArc > 2400 + Math.random() * 1200) {
+        const bogX = BOGOTA.pos.x * cosR + BOGOTA.pos.z * sinR;
+        const bogZ = -BOGOTA.pos.x * sinR + BOGOTA.pos.z * cosR;
+        if (bogZ > 0.1) {
+          /* Find visible origin candidates */
+          const visible = [];
+          for (let i = 1; i < CITIES.length; i++) {
+            const c = CITIES[i];
+            const czR = -c.pos.x * sinR + c.pos.z * cosR;
+            if (czR > 0.1) visible.push(c);
+          }
+          if (visible.length > 0) {
+            lastArc = now;
+            fireArc(visible[Math.floor(Math.random() * visible.length)]);
+          }
+        }
       }
 
       /* Draw active arcs · great circle to Bogotá */
@@ -3962,14 +3980,14 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
         let alpha;
         if (age < 1800) {
           pgr = age / 1800;
-          alpha = 0.85 * (age / 600);
-          if (alpha > 0.85) alpha = 0.85;
+          alpha = 0.95 * (age / 500);
+          if (alpha > 0.95) alpha = 0.95;
         } else if (age < 3800) {
           pgr = 1;
-          alpha = 0.85;
+          alpha = 0.95;
         } else {
           pgr = 1;
-          alpha = 0.85 * (1 - (age - 3800) / 1700);
+          alpha = 0.95 * (1 - (age - 3800) / 1700);
         }
 
         const f = arc.from, t = arc.to;
@@ -3980,7 +3998,8 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 
         const segs = 60;
         ctx.strokeStyle = 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',' + alpha.toFixed(3) + ')';
-        ctx.lineWidth = 1.4;
+        ctx.lineWidth = 2.2;
+        ctx.lineCap = 'round';
         ctx.beginPath();
         let arcStarted = false;
         const maxI = Math.floor(segs * pgr);
@@ -4003,7 +4022,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
         }
         ctx.stroke();
 
-        /* Moving comet head at end of drawn portion */
+        /* Moving comet head at end of drawn portion · brighter and bigger */
         if (pgr < 1 && pgr > 0.05) {
           const tt = pgr;
           const a = Math.sin((1 - tt) * omega) / sinO;
@@ -4018,12 +4037,18 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           if (zR > 0) {
             const px = cx + xR * R;
             const py = cy - yy * R;
-            const cg = ctx.createRadialGradient(px, py, 0, px, py, 12);
-            cg.addColorStop(0, 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',0.95)');
+            const cg = ctx.createRadialGradient(px, py, 0, px, py, 22);
+            cg.addColorStop(0, 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',1)');
+            cg.addColorStop(0.3, 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',0.6)');
             cg.addColorStop(1, 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',0)');
             ctx.fillStyle = cg;
             ctx.beginPath();
-            ctx.arc(px, py, 12, 0, Math.PI * 2);
+            ctx.arc(px, py, 22, 0, Math.PI * 2);
+            ctx.fill();
+            /* solid bright center */
+            ctx.fillStyle = 'rgba(' + arc.color[0] + ',' + arc.color[1] + ',' + arc.color[2] + ',1)';
+            ctx.beginPath();
+            ctx.arc(px, py, 3, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -4044,9 +4069,9 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
       smX3 += (mx - smX3) * 0.28;    /* core: seguimiento tight */
       smY3 += (my - smY3) * 0.28;
 
-      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 410) + 'px, ' + (smY - 410) + 'px, 0)';
-      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 170) + 'px, ' + (smY2 - 170) + 'px, 0)';
-      if (core) core.style.transform = 'translate3d(' + (smX3 - 55) + 'px, ' + (smY3 - 55) + 'px, 0)';
+      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 340) + 'px, ' + (smY - 340) + 'px, 0)';
+      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 140) + 'px, ' + (smY2 - 140) + 'px, 0)';
+      if (core) core.style.transform = 'translate3d(' + (smX3 - 35) + 'px, ' + (smY3 - 35) + 'px, 0)';
 
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
