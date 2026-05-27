@@ -190,23 +190,21 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   to { background-position: 140px 140px; }
 }
 
-/* Three-layer spotlight · ligero pero notorio
-   Outer: gold-sepia muy suave (warmth) · Mid: gold-deep (color subtle)
-   Core: crimson pequeño (señalador del cursor). Springs gemelos. */
+/* Pointer-style spotlight · tres capas pequeñas y ligeras
+   No obscure text, only highlights the area near the cursor. */
 .lamp-spot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 680px;
-  height: 680px;
+  width: 340px;
+  height: 340px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(139, 111, 46, 0.16) 0%,
-      rgba(139, 111, 46, 0.08) 30%,
-      rgba(139, 111, 46, 0.03) 50%,
+      rgba(139, 111, 46, 0.08) 0%,
+      rgba(139, 111, 46, 0.04) 40%,
       transparent 70%);
-  filter: blur(44px);
+  filter: blur(28px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
@@ -214,42 +212,41 @@ body:not([data-on-cover="true"]):not([data-on-closing="true"]) .globe-canvas {
   will-change: transform;
 }
 
-/* Mid halo · gold-amber, smaller and tighter */
+/* Mid halo · sharper, tighter follow */
 .lamp-halo {
   position: fixed;
   top: 0;
   left: 0;
-  width: 280px;
-  height: 280px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(180, 130, 60, 0.22) 0%,
-      rgba(139, 111, 46, 0.10) 40%,
-      transparent 70%);
-  filter: blur(22px);
+      rgba(139, 111, 46, 0.12) 0%,
+      rgba(139, 111, 46, 0.05) 45%,
+      transparent 75%);
+  filter: blur(14px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
   transform: translate3d(-50%, -50%, 0);
   will-change: transform;
-  opacity: 0.85;
 }
 
-/* Sharp core · gold-amber punto cálido siguiendo el cursor (sin crimson) */
+/* Pointer core · small tight indicator, the brightest point */
 .lamp-core {
   position: fixed;
   top: 0;
   left: 0;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background:
     radial-gradient(circle,
-      rgba(110, 80, 32, 0.26) 0%,
-      rgba(139, 111, 46, 0.14) 40%,
-      transparent 75%);
-  filter: blur(10px);
+      rgba(110, 80, 32, 0.20) 0%,
+      rgba(139, 111, 46, 0.08) 50%,
+      transparent 80%);
+  filter: blur(5px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
@@ -4060,18 +4057,18 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
     }
     requestAnimationFrame(drawGlobe);
 
-    /* Mouse parallax loop · three spring layers + parallax + globe drift */
+    /* Mouse parallax loop · pointer-style: tight follow on core, lag on outer */
     function tick() {
-      smX  += (mx - smX)  * 0.075;   /* outer lamp: lag grande, ethereal */
-      smY  += (my - smY)  * 0.075;
-      smX2 += (mx - smX2) * 0.15;    /* mid halo: medio */
-      smY2 += (my - smY2) * 0.15;
-      smX3 += (mx - smX3) * 0.28;    /* core: seguimiento tight */
-      smY3 += (my - smY3) * 0.28;
+      smX  += (mx - smX)  * 0.14;    /* outer ambient: lag suave */
+      smY  += (my - smY)  * 0.14;
+      smX2 += (mx - smX2) * 0.26;    /* mid halo: medio */
+      smY2 += (my - smY2) * 0.26;
+      smX3 += (mx - smX3) * 0.45;    /* core pointer: tight, casi inmediato */
+      smY3 += (my - smY3) * 0.45;
 
-      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 340) + 'px, ' + (smY - 340) + 'px, 0)';
-      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 140) + 'px, ' + (smY2 - 140) + 'px, 0)';
-      if (core) core.style.transform = 'translate3d(' + (smX3 - 45) + 'px, ' + (smY3 - 45) + 'px, 0)';
+      if (lamp) lamp.style.transform = 'translate3d(' + (smX - 170) + 'px, ' + (smY - 170) + 'px, 0)';
+      if (halo) halo.style.transform = 'translate3d(' + (smX2 - 75) + 'px, ' + (smY2 - 75) + 'px, 0)';
+      if (core) core.style.transform = 'translate3d(' + (smX3 - 25) + 'px, ' + (smY3 - 25) + 'px, 0)';
 
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
