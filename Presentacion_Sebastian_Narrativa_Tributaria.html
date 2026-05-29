@@ -315,6 +315,11 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   overflow: hidden;
 }
 .slide > * { flex-shrink: 0; }
+/* Fit-to-viewport scaler · smooth rescale when the window resizes */
+.cover-content, .hook-grid, .col-wrap, .question-stage,
+.strat-detail-wrap, .law-grid, .closing-content {
+  transition: transform 280ms var(--ease-paper);
+}
 /* Cover + closing stay centered (sparse content) */
 .slide.cover,
 .slide.closing { justify-content: center; }
@@ -3684,6 +3689,30 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
     setTimeout(() => deck.classList.remove('in-motion'), 700);
   }
 
+  /* ──────────────────────────────────────────────────────
+     Fit-to-viewport · scale each slide's content wrapper so
+     nothing is ever clipped, regardless of screen height
+     (Windows browsers at 100%, short laptops, projectors).
+     ────────────────────────────────────────────────────── */
+  const FIT_SEL = '.cover-content, .hook-grid, .col-wrap, .question-stage, .strat-detail-wrap, .law-grid, .closing-content';
+  function fitSlide(s) {
+    const wrap = Array.from(s.children).find(c => c.matches(FIT_SEL));
+    if (!wrap) return;
+    wrap.style.transform = 'none';
+    const cs = getComputedStyle(s);
+    const availH = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const availW = s.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const natH = wrap.offsetHeight, natW = wrap.offsetWidth;
+    if (!natH || !natW) return;
+    const scale = Math.min(1, availH / natH, availW / natW);
+    if (scale < 0.999) {
+      const centered = s.classList.contains('cover') || s.classList.contains('closing');
+      wrap.style.transformOrigin = centered ? 'center center' : 'top center';
+      wrap.style.transform = 'scale(' + scale.toFixed(4) + ')';
+    }
+  }
+  function fitAll() { slides.forEach(fitSlide); }
+
   function go(n) {
     if (isAnimating) return;
     const t = Math.max(0, Math.min(total - 1, n));
@@ -3739,11 +3768,19 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 
   document.addEventListener('fullscreenchange', () => {
     document.documentElement.dataset.fullscreen = !!document.fullscreenElement;
+    setTimeout(fitAll, 60);
   });
 
   const h = parseInt(location.hash.replace('#', ''), 10);
   if (!isNaN(h) && h >= 1 && h <= total) idx = h - 1;
   apply();
+
+  /* Keep content fitted across font load, window resize, orientation. */
+  fitAll();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  window.addEventListener('load', fitAll);
+  let fitTimer = null;
+  window.addEventListener('resize', () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitAll, 120); });
 
   /* ──────────────────────────────────────────────────────
      WOW background · mouse parallax + lamp spotlight
