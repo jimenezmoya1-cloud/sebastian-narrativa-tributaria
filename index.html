@@ -307,7 +307,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   width: 100vw;
   height: 100vh;
   position: relative;
-  padding: clamp(96px, 9vw, 128px) clamp(60px, 7vw, 130px) clamp(50px, 5vw, 76px);
+  padding: clamp(56px, 5vw, 88px) clamp(48px, 5.6vw, 112px) clamp(32px, 3vw, 52px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1022,29 +1022,29 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   grid-template-columns: 1fr auto 1fr;
   gap: clamp(28px, 4vw, 60px);
   align-items: stretch;
-  margin-top: 50px;
+  margin-top: 28px;
 }
 .column-art {
   position: relative;
-  padding: clamp(32px, 3.4vw, 48px) clamp(26px, 3vw, 40px);
+  padding: clamp(22px, 2.4vw, 34px) clamp(24px, 2.8vw, 38px);
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  min-height: 460px;
+  gap: 15px;
+  min-height: 360px;
 }
 .column-art .pediment {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 8px;
-  padding-bottom: 18px;
+  gap: 6px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--gold-line);
 }
 .column-art .pediment .smcp { color: var(--gold-deep); }
 .column-art .pediment .art-no {
   font-family: var(--font-display);
-  font-size: clamp(60px, 6.6vw, 96px);
+  font-size: clamp(46px, 4.6vw, 66px);
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.024em;
@@ -1070,7 +1070,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .column-art p {
   font-family: var(--font-body);
   font-size: clamp(13.5px, 1vw, 16px);
-  line-height: 1.66;
+  line-height: 1.5;
   color: var(--ink-2);
   flex: 1;
   text-align: justify;
@@ -1264,13 +1264,13 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   grid-template-columns: 1fr auto 1fr;
   gap: clamp(24px, 3.4vw, 48px);
   align-items: start;
-  margin-top: 22px;
+  margin-top: 14px;
 }
 .org-side { display: flex; flex-direction: column; align-items: center; }
 .org-side-head {
   text-align: center;
-  margin-bottom: 22px;
-  padding-bottom: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--gold-line);
   width: 100%;
 }
@@ -1296,7 +1296,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   width: 100%;
 }
 .org-node {
-  padding: 14px 20px;
+  padding: 10px 18px;
   background: linear-gradient(135deg, #FAF3DD 0%, #F2EAC9 100%);
   border: 1px solid rgba(139, 111, 46, 0.30);
   border-radius: 2px;
@@ -1348,7 +1348,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   border: 1px solid var(--crimson);
   border-radius: 100px;
 }
-.org-node.sub { min-width: 180px; padding: 10px 14px; }
+.org-node.sub { min-width: 180px; padding: 8px 14px; }
 .org-name {
   font-family: var(--font-display);
   font-weight: 400;
@@ -1371,8 +1371,8 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   transform-origin: top;
   transition: transform 600ms var(--ease-quill);
 }
-.org-stem { height: 28px; }
-.org-stem-small { height: 18px; }
+.org-stem { height: 20px; }
+.org-stem-small { height: 14px; }
 .slide[data-state="active"] .org-stem { transform: scaleY(1); transition-delay: 600ms; }
 .slide[data-state="active"] .org-stem-small { transform: scaleY(1); transition-delay: 1200ms; }
 
@@ -1380,14 +1380,14 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   position: relative;
   width: 80%;
   max-width: 360px;
-  height: 30px;
+  height: 22px;
 }
 .org-fork-stem {
   position: absolute;
   top: 0;
   left: 50%;
   width: 1px;
-  height: 14px;
+  height: 10px;
   background: var(--gold-line);
   transform: scaleY(0);
   transform-origin: top;
@@ -1395,7 +1395,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 }
 .org-fork-bar {
   position: absolute;
-  top: 14px;
+  top: 10px;
   left: 50%;
   right: 50%;
   height: 1px;
@@ -1404,9 +1404,9 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 }
 .org-fork-leg-l, .org-fork-leg-r {
   position: absolute;
-  top: 14px;
+  top: 10px;
   width: 1px;
-  height: 16px;
+  height: 12px;
   background: var(--gold-line);
   transform: scaleY(0);
   transform-origin: top;
@@ -1481,7 +1481,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 /* Colombia nexus callout · explica por qué aplica el art. 319-8 */
 .colombia-nexus {
   margin-top: 24px;
-  padding: clamp(16px, 1.8vw, 24px) clamp(22px, 2.4vw, 36px);
+  padding: clamp(12px, 1.4vw, 18px) clamp(22px, 2.4vw, 36px);
   background: linear-gradient(135deg, #F6E0D6 0%, #EFD0C3 100%);
   border: 1px solid var(--crimson);
   border-radius: 2px;
@@ -1497,8 +1497,8 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   font-family: var(--font-display);
   font-style: italic;
   font-size: clamp(15px, 1.3vw, 18px);
-  margin-bottom: 12px;
-  padding-bottom: 10px;
+  margin-bottom: 8px;
+  padding-bottom: 7px;
   border-bottom: 1px solid rgba(165, 28, 48, 0.22);
 }
 .nexus-points {
@@ -1547,7 +1547,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   grid-template-columns: 1fr 1fr;
   gap: clamp(16px, 2vw, 28px);
   align-items: stretch;
-  margin-top: 24px;
+  margin-top: 16px;
 }
 @media (max-width: 1000px) { .org-aftermath { grid-template-columns: 1fr; } }
 .org-aftermath .colombia-nexus { margin-top: 0; height: 100%; }
@@ -2153,7 +2153,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   display: grid;
   grid-template-columns: 40px 1fr;
   gap: 22px;
-  padding: 22px 0;
+  padding: 15px 0;
   border-bottom: 1px solid var(--ink-5);
 }
 .reason:last-child { border: none; }
@@ -2167,7 +2167,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .reason-text {
   font-family: var(--font-body);
   font-size: clamp(13.5px, 1.05vw, 16px);
-  line-height: 1.64;
+  line-height: 1.5;
   color: var(--ink-2);
 }
 .reason-text em { color: var(--ink-1); font-style: italic; }
@@ -2178,21 +2178,21 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .articles {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(18px, 1.8vw, 26px);
-  margin-top: 26px;
+  gap: clamp(14px, 1.4vw, 20px);
+  margin-top: 16px;
 }
 .article {
-  padding: clamp(20px, 2vw, 28px);
+  padding: clamp(16px, 1.6vw, 22px);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 220px;
+  gap: 9px;
+  min-height: 0;
 }
 .article-id {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  padding-bottom: 12px;
+  padding-bottom: 9px;
   border-bottom: 1px solid var(--ink-5);
 }
 .article-no {
@@ -2229,7 +2229,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .article p {
   font-family: var(--font-body);
   font-size: clamp(13px, 1vw, 15px);
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--ink-2);
   flex: 1;
 }
@@ -2237,7 +2237,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  padding-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid var(--ink-5);
 }
 .article-meta span {
@@ -2572,7 +2572,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           <span class="pilcrow">Tensión normativa</span>
         </div>
 
-        <h2 class="display-l reveal reveal-up d-2" style="margin-top: 22px; max-width: 22ch;">
+        <h2 class="display-l reveal reveal-up d-2" style="margin-top: 14px; max-width: 22ch;">
           Dos regímenes que <span class="italic crimson">coexisten</span> y se encuentran
         </h2>
 
@@ -2623,7 +2623,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </article>
         </div>
 
-        <p class="lead italic reveal reveal-up d-7" style="margin: 52px auto 0; text-align: center; max-width: 70ch; color: var(--ink-3); font-family: var(--font-grace);">
+        <p class="lead italic reveal reveal-up d-7" style="margin: 28px auto 0; text-align: center; max-width: 70ch; color: var(--ink-3); font-family: var(--font-grace);">
           ¿Dónde termina la <span class="gold-deep">planeación legítima</span> y comienza el <span class="crimson">abuso tributario</span>? El ordenamiento colombiano no traza una frontera explícita.
         </p>
       </div>
@@ -2786,7 +2786,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           <span class="pilcrow">Diagrama de la operación</span>
         </div>
 
-        <h2 class="display-l reveal reveal-up d-2" style="margin-top: 18px;">
+        <h2 class="display-l reveal reveal-up d-2" style="margin-top: 12px;">
           Antes <span class="italic muted">y</span> después <span class="italic crimson">de la escisión</span>
         </h2>
 
@@ -2915,7 +2915,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </div>
         </div>
 
-        <p class="caption reveal reveal-up d-10" style="margin-top: 20px; text-align: center; max-width: 92ch; margin-left: auto; margin-right: auto;">
+        <p class="caption reveal reveal-up d-10" style="margin-top: 12px; text-align: center; max-width: 92ch; margin-left: auto; margin-right: auto;">
           <em>Figura I.</em> Estructura societaria de Servicios Globales de América S. A. S. antes y después de la escisión parcial internacional bajo el régimen de neutralidad fiscal del artículo 319-8, operación que comprende la <span class="crimson">transferencia de activos localizados en Colombia entre entidades extranjeras</span>, incluyendo la intervención posterior de la DIAN.
         </p>
       </div>
@@ -3423,11 +3423,11 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
             <span class="roman">XVI.</span>
             <span class="pilcrow">Propuesta de impacto</span>
           </div>
-          <h2 class="display-l reveal reveal-up d-2" style="margin-top: 18px; max-width: 18ch;">
+          <h2 class="display-l reveal reveal-up d-2" style="margin-top: 14px; max-width: 18ch;">
             ¿Por qué un <span class="italic crimson">proyecto de ley</span>?
           </h2>
 
-          <div class="reasons" style="margin-top: 22px;">
+          <div class="reasons" style="margin-top: 16px;">
             <div class="reason reveal reveal-up d-3">
               <span class="reason-roman">i.</span>
               <p class="reason-text"><em>Reserva de ley en materia tributaria</em>, artículos 150 numeral 12 y 338 de la Constitución Política. La carga probatoria, la presunción de legalidad y los motivos económicos válidos son materias indelegables a la doctrina administrativa.</p>
@@ -3456,7 +3456,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
               <span class="roman">XVII.</span>
               <span class="pilcrow">Articulado del proyecto de ley</span>
             </div>
-            <h2 class="display-l reveal reveal-up d-2" style="margin-top: 18px;">
+            <h2 class="display-l reveal reveal-up d-2" style="margin-top: 12px;">
               Cuatro <span class="italic crimson">disposiciones</span> centrales.
             </h2>
           </div>
