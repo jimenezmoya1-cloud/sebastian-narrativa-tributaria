@@ -64,8 +64,8 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
-  /* Custom cursor · classical gold ring + crosshair · hotspot at center */
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="7" fill="none" stroke="%238B6F2E" stroke-width="1.3" opacity="0.92"/><circle cx="14" cy="14" r="1.6" fill="%238B6F2E"/><line x1="14" y1="2" x2="14" y2="5.5" stroke="%238B6F2E" stroke-width="1" opacity="0.85"/><line x1="14" y1="22.5" x2="14" y2="26" stroke="%238B6F2E" stroke-width="1" opacity="0.85"/><line x1="2" y1="14" x2="5.5" y2="14" stroke="%238B6F2E" stroke-width="1" opacity="0.85"/><line x1="22.5" y1="14" x2="26" y2="14" stroke="%238B6F2E" stroke-width="1" opacity="0.85"/></svg>') 14 14, auto;
+  /* Custom cursor · classical crimson ring + crosshair, cream halo · hotspot at center */
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="7" fill="none" stroke="%23FBF5E6" stroke-width="2.6" opacity="0.55"/><line x1="14" y1="2" x2="14" y2="5.5" stroke="%23FBF5E6" stroke-width="2.4" opacity="0.5"/><line x1="14" y1="22.5" x2="14" y2="26" stroke="%23FBF5E6" stroke-width="2.4" opacity="0.5"/><line x1="2" y1="14" x2="5.5" y2="14" stroke="%23FBF5E6" stroke-width="2.4" opacity="0.5"/><line x1="22.5" y1="14" x2="26" y2="14" stroke="%23FBF5E6" stroke-width="2.4" opacity="0.5"/><circle cx="14" cy="14" r="7" fill="none" stroke="%23A51C30" stroke-width="1.3" opacity="0.95"/><circle cx="14" cy="14" r="1.6" fill="%23A51C30"/><line x1="14" y1="2" x2="14" y2="5.5" stroke="%23A51C30" stroke-width="1" opacity="0.9"/><line x1="14" y1="22.5" x2="14" y2="26" stroke="%23A51C30" stroke-width="1" opacity="0.9"/><line x1="2" y1="14" x2="5.5" y2="14" stroke="%23A51C30" stroke-width="1" opacity="0.9"/><line x1="22.5" y1="14" x2="26" y2="14" stroke="%23A51C30" stroke-width="1" opacity="0.9"/></svg>') 14 14, auto;
 }
 
 /* On click zones (navigation) · larger pointing cursor for affordance */
@@ -1522,6 +1522,39 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 }
 .nexus-points strong { color: var(--crimson); font-weight: 400; font-style: italic; }
 
+/* Control label on the "antes" stem (Matriz → Filial) */
+.org-stem-wrap { position: relative; display: flex; justify-content: center; }
+.org-stem-note {
+  position: absolute;
+  left: calc(50% + 9px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-grace);
+  font-style: italic;
+  font-size: 10.5px;
+  color: var(--ink-3);
+}
+
+/* Aftermath row · two callouts side by side (Colombia nexus + DIAN) */
+.org-aftermath {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  align-items: stretch;
+  margin-top: 24px;
+}
+@media (max-width: 1000px) { .org-aftermath { grid-template-columns: 1fr; } }
+.org-aftermath .colombia-nexus { margin-top: 0; height: 100%; }
+.org-aftermath .nexus-points { grid-template-columns: 1fr; gap: 8px; }
+.dian-nexus {
+  background: linear-gradient(135deg, #ECE7DD 0%, #DED7C8 100%);
+  border-color: rgba(74, 44, 26, 0.45);
+}
+.dian-nexus .nexus-head { color: var(--ink-1); border-bottom-color: rgba(74, 44, 26, 0.22); }
+.dian-nexus .nexus-points p::before { background: var(--ink-2); }
+.dian-nexus .nexus-points strong { color: var(--crimson); }
+
 /* ════════════════════════════════════════════════════════════
    XV · DIAN STAMP
    ════════════════════════════════════════════════════════════ */
@@ -2453,10 +2486,6 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
             <span class="label">Lector técnico</span>
             <span class="value">Óscar Munévar</span>
           </div>
-          <div class="meta-item reveal reveal-fade d-12">
-            <span class="label">Sustentación</span>
-            <span class="value">XVI · V · MMXXVI</span>
-          </div>
         </div>
 
         <svg class="cover-entablature reveal reveal-scale d-12" viewBox="0 0 360 18" aria-hidden="true">
@@ -2767,7 +2796,10 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
                 <div class="org-name">Matriz colombiana</div>
                 <div class="org-sub">Servicios Globales de América S. A. S.</div>
               </div>
-              <div class="org-stem"></div>
+              <div class="org-stem-wrap">
+                <div class="org-stem"></div>
+                <span class="org-stem-note">Control 100%</span>
+              </div>
               <div class="org-node">
                 <div class="org-name">Filial estadounidense</div>
                 <div class="org-sub">Jurisdicción · EE. UU.</div>
@@ -2852,20 +2884,34 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </div>
         </div>
 
-        <div class="colombia-nexus reveal reveal-up d-8">
-          <div class="nexus-head">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <span>Activos físicamente localizados en Colombia</span>
+        <div class="org-aftermath reveal reveal-up d-8">
+          <div class="colombia-nexus">
+            <div class="nexus-head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>Activos físicamente localizados en Colombia</span>
+            </div>
+            <div class="nexus-points">
+              <p>Centros logísticos, infraestructura tecnológica y equipos productivos ubicados en territorio colombiano.</p>
+              <p>Pertenecen al patrimonio de la sociedad escindida (filial estadounidense) antes de la operación.</p>
+              <p>Su transferencia entre entidades extranjeras es el supuesto que <strong>activa el régimen del art. 319-8 E.T.</strong></p>
+            </div>
           </div>
-          <div class="nexus-points">
-            <p>Centros logísticos, infraestructura tecnológica y equipos productivos ubicados en territorio colombiano.</p>
-            <p>Pertenecen al patrimonio de la sociedad escindida (filial estadounidense) antes de la operación.</p>
-            <p>Su transferencia entre entidades extranjeras es el supuesto que <strong>activa el régimen del art. 319-8 E.T.</strong></p>
+
+          <div class="colombia-nexus dian-nexus">
+            <div class="nexus-head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+              <span>Un año después · intervención de la DIAN</span>
+            </div>
+            <div class="nexus-points">
+              <p>Oficio Persuasivo n.º 1234 de 2025.</p>
+              <p>Invoca la <strong>cláusula general antiabuso · art. 869 del E.T.</strong></p>
+              <p>Cuestiona el sustento económico y el propósito empresarial de la operación.</p>
+            </div>
           </div>
         </div>
 
         <p class="caption reveal reveal-up d-10" style="margin-top: 20px; text-align: center; max-width: 92ch; margin-left: auto; margin-right: auto;">
-          <em>Figura I.</em> Estructura societaria de Servicios Globales de América S. A. S. antes y después de la escisión parcial internacional bajo el régimen de neutralidad fiscal del artículo 319-8, operación que comprende la <span class="crimson">transferencia de activos localizados en Colombia entre entidades extranjeras</span>.
+          <em>Figura I.</em> Estructura societaria de Servicios Globales de América S. A. S. antes y después de la escisión parcial internacional bajo el régimen de neutralidad fiscal del artículo 319-8, operación que comprende la <span class="crimson">transferencia de activos localizados en Colombia entre entidades extranjeras</span>, incluyendo la intervención posterior de la DIAN.
         </p>
       </div>
     </section>
