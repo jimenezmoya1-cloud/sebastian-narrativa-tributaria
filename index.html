@@ -1257,9 +1257,9 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
 .org-chart {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: clamp(28px, 4vw, 56px);
+  gap: clamp(24px, 3.4vw, 48px);
   align-items: start;
-  margin-top: 40px;
+  margin-top: 22px;
 }
 .org-side { display: flex; flex-direction: column; align-items: center; }
 .org-side-head {
@@ -1426,9 +1426,9 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 56px 20px 0;
-  min-width: 180px;
+  gap: 12px;
+  padding: 44px 16px 0;
+  min-width: 170px;
 }
 .bridge-art {
   font-family: var(--font-body);
@@ -1472,6 +1472,55 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
   font-size: 11.5px;
   color: var(--crimson);
 }
+
+/* Colombia nexus callout · explica por qué aplica el art. 319-8 */
+.colombia-nexus {
+  margin-top: 24px;
+  padding: clamp(16px, 1.8vw, 24px) clamp(22px, 2.4vw, 36px);
+  background: linear-gradient(135deg, #F6E0D6 0%, #EFD0C3 100%);
+  border: 1px solid var(--crimson);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 28px -16px rgba(165, 28, 48, 0.28);
+}
+.nexus-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--crimson);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(15px, 1.3vw, 18px);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(165, 28, 48, 0.22);
+}
+.nexus-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.6vw, 26px);
+}
+@media (max-width: 1000px) { .nexus-points { grid-template-columns: 1fr; gap: 8px; } }
+.nexus-points p {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 0.95vw, 14px);
+  line-height: 1.5;
+  color: var(--ink-2);
+  position: relative;
+  padding-left: 14px;
+}
+.nexus-points p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--crimson);
+}
+.nexus-points strong { color: var(--crimson); font-weight: 400; font-style: italic; }
 
 /* ════════════════════════════════════════════════════════════
    XV · DIAN STAMP
@@ -2441,11 +2490,11 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </div>
 
           <p class="lead reveal reveal-up d-4">
-            <span class="dropcap">L</span>unes a las ocho y media de la mañana. Después de dos años de planeación, asesoría legal y ejecución cuidadosa de una <em class="italic">escisión parcial internacional</em> bajo el régimen de neutralidad fiscal del <span class="gold-deep">artículo 319-8 del Estatuto Tributario</span>, la <span class="crimson under">DIAN</span> responde con una sola notificación.
+            <span class="dropcap">L</span>uego de dos años de idear y estructurar la reorganización, la sociedad escindió su filial estadounidense y transfirió en bloque a una <em class="italic">sociedad beneficiaria</em> una línea de negocio integrada, entre otros, por <span class="crimson">activos ubicados en Colombia</span>. La <span class="crimson under">DIAN</span> responde con una sola notificación.
           </p>
 
           <p class="caption reveal reveal-up d-6" style="margin-top: 22px;">
-            El equipo jurídico, dirigido por Daniel Jiménez, debe ahora desvirtuar la posición de la Autoridad Tributaria y demostrar el sustento económico de la operación.
+            Por tratarse de la transferencia de activos localizados en Colombia entre entidades extranjeras, la operación quedó comprendida en el régimen de neutralidad del <span class="gold-deep">artículo 319-8 del E.T.</span> El equipo jurídico, dirigido por Daniel Jiménez, debe ahora demostrar el sustento económico de la operación.
           </p>
         </div>
 
@@ -2466,7 +2515,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </h3>
 
           <p class="letter-body">
-            La operación adelantada por <em>Servicios Globales de América S. A. S.</em> habría tenido como finalidad principal el traslado de activos hacia una jurisdicción con menor carga tributaria. En consecuencia, se invoca la <em>cláusula general antiabuso</em> a efectos de verificar la legitimidad económica de la escisión parcial.
+            La operación adelantada por <em>Servicios Globales de América S. A. S.</em>, que comprendió la transferencia de activos localizados en Colombia, habría tenido como finalidad principal su traslado hacia una jurisdicción con menor carga tributaria. En consecuencia, se invoca la <em>cláusula general antiabuso</em> a efectos de verificar la legitimidad económica de la escisión parcial.
           </p>
 
           <footer class="letter-foot">
@@ -2644,14 +2693,14 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
               <article class="tl-card vellum">
                 <span class="tl-roman">Etapa ii</span>
                 <h4 class="tl-title">Planeación</h4>
-                <p class="tl-desc">Valentina García propone trasladar la línea de negocio a una filial en EE.&nbsp;UU.</p>
+                <p class="tl-desc">Trasladar una línea de negocio con activos en Colombia hacia una nueva sociedad en EE.&nbsp;UU.</p>
               </article>
             </div>
             <div class="tl-stop">
               <article class="tl-card vellum">
                 <span class="tl-roman">Etapa iii</span>
                 <h4 class="tl-title">Escisión parcial</h4>
-                <p class="tl-desc">Bajo el régimen de neutralidad del artículo 319-8, sin enajenación de activos.</p>
+                <p class="tl-desc">La transferencia de activos en Colombia entre entidades extranjeras activa el art. 319-8.</p>
               </article>
               <div class="tl-node"></div>
             </div>
@@ -2732,11 +2781,11 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
               <div class="org-children-row">
                 <div class="org-node sub highlighted tracked">
                   <div class="org-name">Línea de negocio</div>
-                  <div class="org-sub">Soluciones logísticas</div>
+                  <div class="org-sub">Soluciones logísticas · activos en Colombia</div>
                 </div>
                 <div class="org-node sub">
                   <div class="org-name">Otras operaciones</div>
-                  <div class="org-sub">Modelo corporativo</div>
+                  <div class="org-sub">Sin vínculo con Colombia</div>
                 </div>
               </div>
             </div>
@@ -2784,6 +2833,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
                   <div class="org-stem-small"></div>
                   <div class="org-node sub">
                     <div class="org-name">Otras operaciones</div>
+                    <div class="org-sub">Sin vínculo con Colombia</div>
                   </div>
                 </div>
                 <div class="org-subtree">
@@ -2794,7 +2844,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
                   <div class="org-stem-small"></div>
                   <div class="org-node sub highlighted tracked">
                     <div class="org-name">Línea de negocio</div>
-                    <div class="org-sub">migrada</div>
+                    <div class="org-sub">activos en Colombia · migrada</div>
                   </div>
                 </div>
               </div>
@@ -2802,8 +2852,20 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           </div>
         </div>
 
-        <p class="caption reveal reveal-up d-10" style="margin-top: 32px; text-align: center; max-width: 90ch; margin-left: auto; margin-right: auto;">
-          <em>Figura I.</em> Estructura societaria de Servicios Globales de América S. A. S. La <span class="crimson">línea de negocio</span> migra desde la filial estadounidense hacia una nueva <span class="crimson">sociedad beneficiaria</span>, bajo el régimen de neutralidad fiscal del artículo 319-8.
+        <div class="colombia-nexus reveal reveal-up d-8">
+          <div class="nexus-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Activos físicamente localizados en Colombia</span>
+          </div>
+          <div class="nexus-points">
+            <p>Centros logísticos, infraestructura tecnológica y equipos productivos ubicados en territorio colombiano.</p>
+            <p>Pertenecen al patrimonio de la sociedad escindida (filial estadounidense) antes de la operación.</p>
+            <p>Su transferencia entre entidades extranjeras es el supuesto que <strong>activa el régimen del art. 319-8 E.T.</strong></p>
+          </div>
+        </div>
+
+        <p class="caption reveal reveal-up d-10" style="margin-top: 20px; text-align: center; max-width: 92ch; margin-left: auto; margin-right: auto;">
+          <em>Figura I.</em> Estructura societaria de Servicios Globales de América S. A. S. antes y después de la escisión parcial internacional bajo el régimen de neutralidad fiscal del artículo 319-8, operación que comprende la <span class="crimson">transferencia de activos localizados en Colombia entre entidades extranjeras</span>.
         </p>
       </div>
     </section>
@@ -3504,7 +3566,7 @@ body[data-on-closing="true"] .arch-pattern { opacity: 0.025; }
           <text x="60" y="78" text-anchor="middle" fill="var(--gold-deep)" font-family="Libre Caslon Text" font-style="italic" font-size="8" letter-spacing="2.5">SUSTENTACIÓN</text>
         </svg>
 
-        <span class="eyebrow reveal d-2">Sustentación · XVI · V · MMXXVI</span>
+        <span class="eyebrow reveal d-2">Sustentación · Maestría en Derecho Tributario</span>
 
         <h2 class="closing-grand reveal reveal-fade d-3">
           <span class="scribed">
